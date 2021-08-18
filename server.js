@@ -14,10 +14,11 @@ app.use(express.json());
 
 app.use(express.static("public"));
 //Change to heroku db link
-mongoose.connect("mongodb://localhost/workout", {
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", {
     useNewUrlParser: true,
-    useFindAndModify: false,
     useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false
 });
 
 app.use(controllers);
